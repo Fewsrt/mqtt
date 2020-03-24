@@ -1,6 +1,10 @@
 import paho.mqtt.client as mqttClient
+import RPi.GPIO as GPIO
 import time
- 
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.OUT)
+
 def on_connect(client, userdata, flags, rc):
  
     if rc == 0:
@@ -37,6 +41,11 @@ while Connected != True:    #Wait for connection
     time.sleep(0.1)
  
 client.subscribe("python/test")
+
+if payload == 1:
+       GPIO.output(23, GPIO.HIGH)
+else:
+      GPIO.output(23, GPIO.LOW)
  
 try:
     while True:
