@@ -22,12 +22,12 @@ try:
   # This function will be invoked every time,
   # a new message arrives for the subscribed topic 
   def on_message(mosq, obj, msg):
-     if (msg.payload=='ON'):
+     if (msg.payload=='1'):
            GPIO.output(LED1,True)
            print 'lamp aan'
            print "Topic: " + str(msg.topic)
            print "QoS: " + str(msg.qos)
-     if (msg.payload=='OFF'):
+     if (msg.payload=='0'):
            GPIO.output(LED1,False)
            print 'lamp uit'
            print "Topic: " + str(msg.topic)
