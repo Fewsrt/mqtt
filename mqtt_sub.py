@@ -41,7 +41,7 @@ try:
     mqttc.on_message = on_message
     mqttc.on_connect = on_connect
     mqttc.on_subscribe = on_subscribe
-    mqttc.on_publish = on_publish
+    mqttc.on_publish = on_message
 
   # Connect with MQTT Broker
     mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
