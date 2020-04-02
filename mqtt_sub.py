@@ -1,5 +1,4 @@
 import paho.mqtt.client as mqtt
-#add for output
 import RPi.GPIO as GPIO
 
 
@@ -13,22 +12,19 @@ LED1 = 23
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED1, GPIO.OUT)
 try:
-  # Define on connect event function
-  # We shall subscribe to our Topic in this function
   def on_connect(self,mosq, obj, rc):
      mqttc.subscribe(MQTT_TOPIC, 0)
      print("Connect on "+MQTT_HOST)
-  # Define on_message event function. 
-  # This function will be invoked every time,
-  # a new message arrives for the subscribed topic 
   def on_message(mosq, obj, msg):
      if (msg.payload=='1'):
            GPIO.output(LED1,True)
+           mqttc.publish("relay/on","ON")
            print 'lamp aan'
            print "Topic: " + str(msg.topic)
            print "QoS: " + str(msg.qos)
      if (msg.payload=='0'):
            GPIO.output(LED1,False)
+           mqttc.publish("relay/off","OFF")
            print 'lamp uit'
            print "Topic: " + str(msg.topic)
            print "QoS: " + str(msg.qos)
