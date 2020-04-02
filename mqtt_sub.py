@@ -34,24 +34,27 @@ try:
         print("Subscribed to Topic: " +
               MQTT_TOPIC + " with QoS: " + str(granted_qos))
 
-  # Initiate MQTT Client
+    def on_publish(client, userdata, result):  # create function for callback
+        print("data published \n")
+
+    # Initiate MQTT Client
     mqttc = mqtt.Client()
 
-  # Assign event callbacks
+    # Assign event callbacks
     mqttc.on_message = on_message
     mqttc.on_connect = on_connect
     mqttc.on_subscribe = on_subscribe
-    mqttc.on_publish = on_message
+    mqttc.on_publish = on_publish
 
-  # Connect with MQTT Broker
+    # Connect with MQTT Broker
     mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
 
-  # Continue monitoring the incoming messages for subscribed topic
+    # Continue monitoring the incoming messages for subscribed topic
     mqttc.loop_forever()
 
 except KeyboardInterrupt:
-  # here you put any code you want to run before the program
-  # exits when you press CTRL+C
+    # here you put any code you want to run before the program
+    # exits when you press CTRL+C
     GPIO.cleanup()
 # finally:
     # GPIO.cleanup() # this ensures a clean exit
