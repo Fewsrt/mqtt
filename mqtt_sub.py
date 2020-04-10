@@ -8,7 +8,8 @@ MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "raspi/1"
 #
-LED1 = 23
+LED1 = 22
+LED2 = 23
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED1, GPIO.OUT)
 try:
@@ -17,18 +18,14 @@ try:
         print("Connect on "+MQTT_HOST)
 
     def on_message(mosq, obj, msg):
-        if (msg.payload == '1'):
+        if (msg.payload == 'relay-1-1'):
             GPIO.output(LED1, True)
-            mqttc.publish("relay/on", "ON")
-            print 'lamp aan'
-            print "Topic: " + str(msg.topic)
-            print "QoS: " + str(msg.qos)
-        if (msg.payload == '0'):
+        if (msg.payload == 'relay-1-0'):
             GPIO.output(LED1, False)
-            mqttc.publish("relay/off", "OFF")
-            print 'lamp uit'
-            print "Topic: " + str(msg.topic)
-            print "QoS: " + str(msg.qos)
+        if (msg.payload == 'relay-2-1'):
+            GPIO.output(LED2, True)
+        if (msg.payload == 'relay-2-0'):
+            GPIO.output(LED2, False)
 
     def on_subscribe(mosq, obj, mid, granted_qos):
         print("Subscribed to Topic: " +
