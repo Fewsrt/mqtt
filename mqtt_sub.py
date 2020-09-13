@@ -4,15 +4,20 @@ import RPi.GPIO as GPIO
 
 
 # Define Variables
-MQTT_HOST = "b0710a3b7c88.sn.mynetname.net"
+MQTT_HOST = "192.168.88.221"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "raspi/1"
 #
-LED1 = 22
-LED2 = 23
+LED1 = 16
+LED2 = 12
+LED3 = 7
+LED4 = 8
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED1, GPIO.OUT)
+GPIO.setup(LED2, GPIO.OUT)
+GPIO.setup(LED3, GPIO.OUT)
+GPIO.setup(LED4, GPIO.OUT)
 try:
     def on_connect(self, mosq, obj, rc):
         mqttc.subscribe(MQTT_TOPIC, 0)
@@ -27,6 +32,14 @@ try:
             GPIO.output(LED2, True)
         if (msg.payload == 'relay-2-0'):
             GPIO.output(LED2, False)
+        if (msg.payload == 'relay-3-1'):
+            GPIO.output(LED3, True)
+        if (msg.payload == 'relay-3-0'):
+            GPIO.output(LED3, False)
+        if (msg.payload == 'relay-4-1'):
+            GPIO.output(LED4, True)
+        if (msg.payload == 'relay-4-0'):
+            GPIO.output(LED4, False)
 
     def on_subscribe(mosq, obj, mid, granted_qos):
         print("Subscribed to Topic: " +
