@@ -2,8 +2,9 @@ import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
 
 
+
 # Define Variables
-MQTT_HOST = "fasacserver.ddns.net"
+MQTT_HOST = "b0710a3b7c88.sn.mynetname.net"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "raspi/1"
