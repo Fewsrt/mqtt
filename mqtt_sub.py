@@ -31,6 +31,7 @@ try:
             GPIO.output(LED1, True)
         if (msg.payload == 'relay-1-0'):
             print("relay off")
+            client.publish("relay-1-1-off", "OFF")
             GPIO.output(LED1, False)
         if (msg.payload == 'relay-2-1'):
             GPIO.output(LED2, True)
