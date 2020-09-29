@@ -26,6 +26,7 @@ try:
 
     def on_message(mosq, obj, msg):
         if (msg.payload == 'relay-1-1'):
+            client.publish("relay-1-1-on", "ON")
             print("relay on")
             GPIO.output(LED1, True)
         if (msg.payload == 'relay-1-0'):
@@ -48,8 +49,8 @@ try:
         print("Subscribed to Topic: " +
               MQTT_TOPIC + " with QoS: " + str(granted_qos))
 
-    def on_publish(client, userdata, result):  # create function for callback
-        print("data published")
+    # def on_publish(client, userdata, result):  # create function for callback
+    #     print("data published")
 
     # Initiate MQTT Client
     client = mqtt.Client()
