@@ -7,6 +7,7 @@ MQTT_HOST = "192.168.88.220"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "raspi/1"
+MQTT_PUB = "raspi/1"
 #
 LED1 = 16
 LED2 = 12
@@ -20,7 +21,7 @@ GPIO.setup(LED4, GPIO.OUT)
 try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
-        client.publish("TEST/MQTT", "HELLO MQTT")
+        client.publish(MQTT_PUB, 0)
         print("Connect on "+MQTT_HOST)
 
     def on_message(mosq, obj, msg):
@@ -46,7 +47,7 @@ try:
               MQTT_TOPIC + " with QoS: " + str(granted_qos))
 
     def on_publish(client, userdata, result):  # create function for callback
-        print("data published \n")
+        print("data published")
 
     # Initiate MQTT Client
     client = mqtt.Client()
