@@ -26,24 +26,30 @@ try:
 
     def on_message(mosq, obj, msg):
         if (msg.payload == 'relay-1-1'):
-            client.publish("relay-1-1-on", "ON")
+            client.publish("relay-1-on", "ON")
             print("relay on")
             GPIO.output(LED1, True)
         if (msg.payload == 'relay-1-0'):
             print("relay off")
-            client.publish("relay-1-1-off", "OFF")
+            client.publish("relay-1-off", "OFF")
             GPIO.output(LED1, False)
         if (msg.payload == 'relay-2-1'):
+            client.publish("relay-2-on", "ON")
             GPIO.output(LED2, True)
         if (msg.payload == 'relay-2-0'):
+            client.publish("relay-2-off", "OFF")
             GPIO.output(LED2, False)
         if (msg.payload == 'relay-3-1'):
+            client.publish("relay-3-on", "ON")
             GPIO.output(LED3, True)
         if (msg.payload == 'relay-3-0'):
+            client.publish("relay-3-off", "OFF")
             GPIO.output(LED3, False)
         if (msg.payload == 'relay-4-1'):
+            client.publish("relay-4-on", "ON")
             GPIO.output(LED4, True)
         if (msg.payload == 'relay-4-0'):
+            client.publish("relay-4-off", "OFF")
             GPIO.output(LED4, False)
 
     def on_subscribe(mosq, obj, mid, granted_qos):
