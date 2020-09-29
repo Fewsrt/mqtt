@@ -7,7 +7,7 @@ MQTT_HOST = "192.168.88.220"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "raspi/1"
-MQTT_PUB = "raspi/2"
+MQTT_PUB = "relay-1-1-on"
 #
 LED1 = 16
 LED2 = 12
@@ -21,13 +21,15 @@ GPIO.setup(LED4, GPIO.OUT)
 try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
-        client.publish(MQTT_PUB, 0)
+        client.publish(MQTT_PUB, )
         print("Connect on "+MQTT_HOST)
 
     def on_message(mosq, obj, msg):
         if (msg.payload == 'relay-1-1'):
+            print("relay on")
             GPIO.output(LED1, True)
         if (msg.payload == 'relay-1-0'):
+            print("relay off")
             GPIO.output(LED1, False)
         if (msg.payload == 'relay-2-1'):
             GPIO.output(LED2, True)
