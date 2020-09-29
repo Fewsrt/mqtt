@@ -2,7 +2,6 @@ import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
 
 
-
 # Define Variables
 MQTT_HOST = "192.168.88.221"
 MQTT_PORT = 1883
@@ -20,7 +19,8 @@ GPIO.setup(LED3, GPIO.OUT)
 GPIO.setup(LED4, GPIO.OUT)
 try:
     def on_connect(self, mosq, obj, rc):
-        mqttc.subscribe(MQTT_TOPIC, 0)
+        client.subscribe(MQTT_TOPIC, 0)
+        client.publish("TEST/MQTT", "HELLO MQTT")
         print("Connect on "+MQTT_HOST)
 
     def on_message(mosq, obj, msg):
@@ -49,19 +49,19 @@ try:
         print("data published \n")
 
     # Initiate MQTT Client
-    mqttc = mqtt.Client()
+    client = mqtt.Client()
 
     # Assign event callbacks
-    mqttc.on_message = on_message
-    mqttc.on_connect = on_connect
-    mqttc.on_subscribe = on_subscribe
-    mqttc.on_publish = on_publish
+    client.on_message = on_message
+    client.on_connect = on_connect
+    client.on_subscribe = on_subscribe
+    client.on_publish = on_publish
 
     # Connect with MQTT Broker
-    mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
+    client.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
 
     # Continue monitoring the incoming messages for subscribed topic
-    mqttc.loop_forever()
+    client.loop_forever()
 
 except KeyboardInterrupt:
     # here you put any code you want to run before the program
