@@ -8,6 +8,8 @@ i2c = busio.I2C(board.SCL, board.SDA)
 am = adafruit_am2320.AM2320(i2c)
  
 while True:
-    print("Temperature: ", am.temperature)
-    print("Humidity: ", am.relative_humidity)
+    temp = am.temperature
+    humidity = am.relative_humidity
+    print("Temperature: ", temp)
+    print("Humidity: ", humidity)
     time.sleep(2)

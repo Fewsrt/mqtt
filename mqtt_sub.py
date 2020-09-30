@@ -1,13 +1,19 @@
 import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
+import time
+import board
+import busio
+import adafruit_am2320
 
+# create the I2C shared bus
+i2c = busio.I2C(board.SCL, board.SDA)
+am = adafruit_am2320.AM2320(i2c)
 
 # Define Variables
 MQTT_HOST = "192.168.88.220"
 MQTT_PORT = 1883
 MQTT_KEEPALIVE_INTERVAL = 45
 MQTT_TOPIC = "raspi/1"
-MQTT_PUB = "relay-1-1-on"
 #
 LED1 = 16
 LED2 = 12
@@ -18,10 +24,17 @@ GPIO.setup(LED1, GPIO.OUT)
 GPIO.setup(LED2, GPIO.OUT)
 GPIO.setup(LED3, GPIO.OUT)
 GPIO.setup(LED4, GPIO.OUT)
+
+while True:
+    temp = am.temperature
+    humidity = am.relative_humidity
+    print("Temperature: ", am.temperature)
+    print("Humidity: ", am.relative_humidity)
+    time.sleep(2)
+
 try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
-        client.publish(MQTT_PUB, )
         print("Connect on "+MQTT_HOST)
 
     def on_message(mosq, obj, msg):
