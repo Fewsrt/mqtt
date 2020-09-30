@@ -28,6 +28,7 @@ GPIO.setup(LED4, GPIO.OUT)
 try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
+        client.publish(MQTT_TOPIC, 0)
         print("Connect on "+MQTT_HOST)
 
     def on_message(mosq, obj, msg):
