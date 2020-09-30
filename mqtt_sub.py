@@ -27,10 +27,8 @@ try:
     def on_message(mosq, obj, msg):
         if (msg.payload == 'relay-1-1'):
             client.publish("relay-1-on", "ON")
-            print("relay on")
             GPIO.output(LED1, True)
         if (msg.payload == 'relay-1-0'):
-            print("relay off")
             client.publish("relay-1-off", "OFF")
             GPIO.output(LED1, False)
         if (msg.payload == 'relay-2-1'):
