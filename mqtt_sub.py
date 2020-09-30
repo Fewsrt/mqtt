@@ -25,18 +25,9 @@ GPIO.setup(LED2, GPIO.OUT)
 GPIO.setup(LED3, GPIO.OUT)
 GPIO.setup(LED4, GPIO.OUT)
 
-while True:
-    temp = am.temperature
-    humidity = am.relative_humidity
-    print("Temperature: ", temp)
-    print("Humidity: ", humidity)
-    time.sleep(2)
-
 try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
-        client.publish("temp", temp)
-        client.publish("humidity", humidity)
         print("Connect on "+MQTT_HOST)
 
     def on_message(mosq, obj, msg):
