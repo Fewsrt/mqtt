@@ -1,5 +1,8 @@
 import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
+import time
+from subprocess import check_output
+from re import findall
 
 
 # Define Variables
@@ -24,7 +27,15 @@ try:
         client.publish(MQTT_PUB, )
         print("Connect on "+MQTT_HOST)
 
+    def get_temp():
+        temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
+        return(findall("\d+\.\d+",temp)[0])
+
     def on_message(mosq, obj, msg):
+        while True:
+            temp = get_temp
+            client.publish("Home/RPI3/Temp", temp)
+            time.sleep(2)
         if (msg.payload == 'relay-1-1'):
             client.publish("relay-1-on", "ON")
             GPIO.output(LED1, True)
