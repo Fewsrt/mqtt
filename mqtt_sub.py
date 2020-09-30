@@ -27,13 +27,13 @@ try:
         client.publish(MQTT_PUB, )
         print("Connect on "+MQTT_HOST)
 
-    def get_temp():
-        temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
-        return(findall("\d+\.\d+",temp)[0])
+    # def get_temp():
+    #     temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
+    #     return(findall("\d+\.\d+",temp)[0])
 
     def on_message(mosq, obj, msg):
-        temp = get_temp
-        client.publish("Home/RPI3/Temp", temp)
+        # temp = get_temp
+        # client.publish("Home/RPI3/Temp", temp)
         if (msg.payload == 'relay-1-1'):
             client.publish("relay-1-on", "ON")
             GPIO.output(LED1, True)
