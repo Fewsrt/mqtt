@@ -1,6 +1,7 @@
 import paho.mqtt.publish as publish
 from subprocess import check_output
 from re import findall
+import time
 
 def get_temp():
     temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
@@ -12,5 +13,7 @@ def publish_message(topic, message):
 
     publish.single(topic, message, hostname="192.168.88.220")
 
-temp = get_temp()
-publish_message("Home/RPI3/Temp", temp)
+while True:
+    temp = get_temp()
+    publish_message("Home/RPI3/Temp", temp)
+    time.sleep(2)
