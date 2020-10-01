@@ -8,7 +8,7 @@ import os
 # f = Figlet(font='slant')
 # print f.renderText('FaSAC MQTT')
 
-# time.sleep(60)
+time.sleep(60)
 # Define Variables
 MQTT_HOST = "192.168.88.220"
 MQTT_PORT = 1883

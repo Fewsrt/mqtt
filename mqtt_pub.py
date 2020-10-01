@@ -3,6 +3,8 @@ import time
 from subprocess import check_output
 from re import findall
 
+time.sleep(60)
+
 def getserial():
   # Extract serial from cpuinfo file
   cpuserial = "0000000000000000"
