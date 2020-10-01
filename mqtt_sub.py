@@ -5,7 +5,7 @@ from subprocess import check_output
 from re import findall
 import os
 
-time.sleep(60)
+# time.sleep(60)
 # Define Variables
 MQTT_HOST = "192.168.88.220"
 MQTT_PORT = 1883
@@ -26,6 +26,10 @@ try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
         client.publish(MQTT_PUB, )
+        client.publish("relay-1-off", "OFF")
+        client.publish("relay-2-off", "OFF")
+        client.publish("relay-3-off", "OFF")
+        client.publish("relay-4-off", "OFF")
         client.publish("reboot/status/connect", "System Connected. >.<")
         print("Connect on "+MQTT_HOST)
     # def get_temp():
