@@ -1,7 +1,10 @@
 import paho.mqtt.publish as publish
+import time
 from subprocess import check_output
 from re import findall
-import time
+from pyfiglet import Figlet
+f = Figlet(font='slant')
+print f.renderText('FaSAC MQTT')
 
 def getserial():
   # Extract serial from cpuinfo file

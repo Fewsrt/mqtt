@@ -4,6 +4,9 @@ import time
 from subprocess import check_output
 from re import findall
 import os
+from pyfiglet import Figlet
+f = Figlet(font='slant')
+print f.renderText('FaSAC MQTT')
 
 # time.sleep(60)
 # Define Variables
