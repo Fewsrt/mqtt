@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import time
 from subprocess import check_output
 from re import findall
+import os
 
 
 # Define Variables
@@ -58,6 +59,8 @@ try:
         if (msg.payload == 'relay-4-0'):
             client.publish("relay-4-off", "OFF")
             GPIO.output(LED4, False)
+        if (msg.payload == 'reboot'):
+            os.system('sudo reboot')
 
     def on_subscribe(mosq, obj, mid, granted_qos):
         print("Subscribed to Topic: " +
