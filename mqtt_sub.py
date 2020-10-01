@@ -60,6 +60,8 @@ try:
             client.publish("relay-4-off", "OFF")
             GPIO.output(LED4, False)
         if (msg.payload == 'reboot'):
+            client.publish("reboot/status", "System reboot....")
+            time.sleep(5)
             os.system('sudo reboot')
 
     def on_subscribe(mosq, obj, mid, granted_qos):
@@ -67,7 +69,7 @@ try:
               MQTT_TOPIC + " with QoS: " + str(granted_qos))
 
     def on_publish(client, userdata, result):  # create function for callback
-        print("data published")
+        # print("data published")
 
     # Initiate MQTT Client
     client = mqtt.Client()
