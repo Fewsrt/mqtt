@@ -27,13 +27,6 @@ try:
         client.subscribe(MQTT_TOPIC, 0)
         client.publish(MQTT_PUB, )
         print("Connect on "+MQTT_HOST)
-        while True:
-            client.publish("reboot/status/connect", "System Connected. >.<")
-            print("up")
-            time.sleep(2)
-            client.publish("reboot/status/connect", "System Connected.")
-            print("date")
-            time.sleep(2)
     # def get_temp():
     #     temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
     #     return(findall("\d+\.\d+",temp)[0])
@@ -69,6 +62,13 @@ try:
             client.publish("reboot/status/reboot", "System reboot....")
             time.sleep(10)
             print("system reboot")
+        while True:
+            client.publish("reboot/status/connect", "System Connected. >.<")
+            print("up")
+            time.sleep(2)
+            client.publish("reboot/status/connect", "System Connected.")
+            print("date")
+            time.sleep(2)
             # os.system('sudo reboot')
 
     def on_subscribe(mosq, obj, mid, granted_qos):
