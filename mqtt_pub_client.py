@@ -27,13 +27,13 @@ def publish_message(topic, message):
 
     publish.single(topic, message, hostname="192.168.88.220")
 
-temp = get_temp()
-serial = getserial()
-print(serial)
+# temp = get_temp()
+# serial = getserial()
+# print(serial)
 
 while True:
-    # temp = get_temp()
-    # serial = getserial()
-    # print(serial)
-    publish_message("Home/RPI3/Temp", temp)
+    temp = get_temp()
+    serial = getserial()
+    publish_message("Home/RPIZero/serial", serial)
+    publish_message("Home/RPIZero/Temp", temp)
     time.sleep(10)
