@@ -26,6 +26,7 @@ try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
         client.publish(MQTT_PUB, )
+        client.publish("reboot/status/connect", "System Connected. >.<")
         print("Connect on "+MQTT_HOST)
 
     # def get_temp():
@@ -60,7 +61,7 @@ try:
             client.publish("relay-4-off", "OFF")
             GPIO.output(LED4, False)
         if (msg.payload == 'reboot'):
-            client.publish("reboot/status", "System reboot....")
+            client.publish("reboot/status/reboot", "System reboot....")
             time.sleep(10)
             print("system reboot")
             # os.system('sudo reboot')
