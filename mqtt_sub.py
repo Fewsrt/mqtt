@@ -29,8 +29,10 @@ try:
         print("Connect on "+MQTT_HOST)
         while True:
             client.publish("reboot/status/connect", "System Connected. >.<")
+            print("up")
             time.sleep(2)
             client.publish("reboot/status/connect", "System Connected.")
+            print("date")
             time.sleep(2)
     # def get_temp():
     #     temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
