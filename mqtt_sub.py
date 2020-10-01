@@ -26,9 +26,12 @@ try:
     def on_connect(self, mosq, obj, rc):
         client.subscribe(MQTT_TOPIC, 0)
         client.publish(MQTT_PUB, )
-        client.publish("reboot/status/connect", "System Connected. >.<")
         print("Connect on "+MQTT_HOST)
-
+        while True:
+            client.publish("reboot/status/connect", "System Connected. >.<")
+            time.sleep(2)
+            client.publish("reboot/status/connect", "System Connected.")
+            time.sleep(2)
     # def get_temp():
     #     temp = check_output(["vcgencmd","measure_temp"]).decode("UTF-8")
     #     return(findall("\d+\.\d+",temp)[0])
