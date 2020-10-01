@@ -5,7 +5,7 @@ from subprocess import check_output
 from re import findall
 import os
 
-time.sleep(5)
+time.sleep(60)
 # Define Variables
 MQTT_HOST = "192.168.88.220"
 MQTT_PORT = 1883
