@@ -67,14 +67,12 @@ try:
             client.publish("reboot/status/reboot", "System reboot....")
             time.sleep(10)
             print("system reboot")
-        # while True:
-        #     client.publish("reboot/status/connect", "System Connected. >.<")
-        #     print("up")
-        #     time.sleep(2)
-        #     client.publish("reboot/status/connect", "System Connected.")
-        #     print("date")
-        #     time.sleep(2)
             # os.system('sudo reboot')
+        if (msg.payload == 'shutdown'):
+            client.publish("reboot/status/shutdown", "System shutdown....")
+            time.sleep(10)
+            print("system shutdown")
+            # os.system('sudo shutdow -h now')
 
     def on_subscribe(mosq, obj, mid, granted_qos):
         print("Subscribed to Topic: " +
