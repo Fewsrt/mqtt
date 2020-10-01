@@ -32,8 +32,8 @@ serial = getserial()
 print(serial)
 
 while True:
-    temp = get_temp()
-    serial = getserial()
-    print(serial)
+    # temp = get_temp()
+    # serial = getserial()
+    # print(serial)
     publish_message("Home/RPI3/Temp", temp)
     time.sleep(10)
