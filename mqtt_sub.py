@@ -60,9 +60,10 @@ try:
             client.publish("relay-4-off", "OFF")
             GPIO.output(LED4, False)
         if (msg.payload == 'reboot'):
-            client.publish("reboot/status", "System reboot")
+            client.publish("reboot/status", "System reboot....")
             time.sleep(10)
-            os.system('sudo reboot')
+            print("system reboot")
+            # os.system('sudo reboot')
 
     def on_subscribe(mosq, obj, mid, granted_qos):
         print("Subscribed to Topic: " +
