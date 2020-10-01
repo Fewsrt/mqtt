@@ -1,4 +1,4 @@
-import paho.mqtt.client as mqtt
+import paho.mqtt.client as paho
 import RPi.GPIO as GPIO
 import time
 from subprocess import check_output
@@ -85,7 +85,7 @@ try:
         print("data published")
 
     # Initiate MQTT Client
-    client = mqtt.Client()
+    client = paho.Client()
 
     # Assign event callbacks
     client.on_message = on_message
